@@ -1,7 +1,7 @@
 APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=olschweizer
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-# TARGETOS=Linux
+TARGETOS=linux
 TARGETARCH=amd64
 
 
@@ -20,6 +20,15 @@ get:
 build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=${VERSION}
 
+linux: format get
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=${VERSION}
+
+windows: format get
+	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=${VERSION}
+
+macOS: format get
+	CGO_ENABLED=0 GOOS=macOS GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=${VERSION}	
+
 image:
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
@@ -28,3 +37,4 @@ push:
 
 clean:
 	rm -rf kbot
+	docker rmigit  ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}	
