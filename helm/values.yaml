@@ -6,8 +6,8 @@ replicaCount: 1
 
 image:
   repository: "olschweizer"
-  tag: "v1.0.6-d59b716"
-  arch: arm64
+  tag: "v1.0.7-85debe9"
+  arch: amd64
 
 secret:
   name: "kbot"
