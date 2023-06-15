@@ -31,4 +31,26 @@ jobs:
           APP: "kbot"
           REGISTRY: ghcr.io/${{ github.actor }}
         run: make image push
-        
+  
+  cd:
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - uses: mikefarah/yq@mastrer
+      with:
+        cmd: yq -i '.image.tag=strenv(VERSION)'
+    
+    - run: |
+        git config user.name "Oleksandr Shvaitser"
+        git config user.email "al.schweizer@gmail.com"
+        git commit -am "update version $VERSION"
+        git push
+
