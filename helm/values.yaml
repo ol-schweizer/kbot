@@ -5,7 +5,8 @@
 replicaCount: 1
 image:
   repository: "ghcr.io/ol-schweizer"
-  tag: "v1.0.11-05823e7"
+  tag: "v1.0.11-ee6f84d"
+  os: linux
   arch: amd64
 secret:
   name: "kbot"

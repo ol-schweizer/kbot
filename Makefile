@@ -30,11 +30,11 @@ macOS: format get
 	CGO_ENABLED=0 GOOS=macOS GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=${VERSION}	
 
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
 	rm -rf kbot
-	docker rmi  ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}	
+	docker rmi  ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}	

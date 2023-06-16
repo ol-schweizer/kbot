@@ -22,4 +22,4 @@ export TELE_TOKEN
 go build -ldflags "-X="github.com/ol-schweizer/kbot/cmd.appVersion=1.0.2
 
 - cтарт програми
-./ kbot start
+./kbot start
