@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   repository: "ghcr.io/ol-schweizer"
-  tag: "v1.0.11-02c1875"
+  tag: "v1.0.11-77eee93"
   os: linux
   arch: amd64
 secret:
