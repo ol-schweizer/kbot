@@ -16,7 +16,7 @@ pipeline {
 
             }
         }
-        
+
         stage('Image') {
             steps {
                 echo "BILD EXECUTION STARTED"
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( "","dockerhub" ) {
-                    sh "make image"
+                    sh "make push"
                     }
                 }
             }
